@@ -9,13 +9,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
+        this.message = {
+            content: "I will kill them all.",
+            author: "John Wick"
+        };
     }
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        templateUrl: './app.component.html'
+        templateUrl: './app.component.html',
+        styles: ["\n      .author {\n          display: inline-block;\n          font-style: italic;\n          font-size: 12px;\n          width: 80%;\n      }\n      .config {\n        display: inline-block;\n        text-align: right;\n        font-size: 12px;\n        width: 19%;\n      }\n    "]
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
