@@ -1,11 +1,13 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+
+import { Message }  from "./message.model";
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
   // Style for this component only
   styles: [`
-    .author {
+    .username {
         display: inline-block;
         font-style: italic;
         font-size: 12px;
@@ -21,8 +23,6 @@ import { Component } from "@angular/core";
 })
 export class MessageComponent {
   // Creating properties of the class
-  message = {
-    content: "I will kill them all.",
-    author: "John Wick"
-  }
+  // @Input is a class from angular/core that allows passing arguments into this component from a parent component
+  @Input() message: Message;
 }
