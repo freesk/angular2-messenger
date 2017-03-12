@@ -1,8 +1,9 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { Message }  from "./message.model";
 
 @Component({
+  // Related tag
   selector: 'app-message',
   templateUrl: './message.component.html',
   // Style for this component only
@@ -25,4 +26,11 @@ export class MessageComponent {
   // Creating properties of the class
   // @Input is a class from angular/core that allows passing arguments into this component from a parent component
   @Input() message: Message;
+  // @Input is a class from angular/core that allows emitting events to a parent's component
+  // EventEmitter is a class from angular/core which makes us able to create custom events
+  @Output() editClicked = new EventEmitter<String>();
+  // Emit a custom event
+  onEdit() {
+    this.editClicked.emit("New value");
+  }
 }
