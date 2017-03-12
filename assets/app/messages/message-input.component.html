@@ -1,9 +1,12 @@
 <div class="col-md-8 col-md-offset-2">
-  <div class="form-group">
-    <label for="content">Content</label>
-    <!-- #input stores reference to the element -->
-    <input type="text" id="content" class="form-control" #input>
-  </div>
-  <!-- Pass input value into a component's function on click event -->
-  <button class="btn btn-primary" type="submit" (click)="onSave(input.value)">Save</button>
+  <!-- Pass the form itself into a component's function on sumbit event -->
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label for="content">Content</label>
+      <!-- ngModel in this case acts as a pointer to the form's control element -->
+      <!-- "name=content" is automatically detected by Angular -->
+      <input type="text" id="content" class="form-control" ngModel name="content" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
 </div>
