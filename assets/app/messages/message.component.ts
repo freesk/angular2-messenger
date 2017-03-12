@@ -28,9 +28,9 @@ export class MessageComponent {
   @Input() message: Message;
   // @Input is a class from angular/core that allows emitting events to a parent's component
   // EventEmitter is a class from angular/core which makes us able to create custom events
-  @Output() editClicked = new EventEmitter<String>();
+  @Output() edit = new EventEmitter<String>();
   // Emit a custom event
   onEdit() {
-    this.editClicked.emit("New value");
+    this.edit.emit("New value");
   }
 }

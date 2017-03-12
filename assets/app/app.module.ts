@@ -6,6 +6,7 @@ import { FormsModule }  from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { MessageComponent }  from "./messages/message.component";
 import { MessageListComponent }  from "./messages/message-list.component";
+import { MessageInputComponent } from "./messages/message-input.component";
 
 // Decorator attaches additional info to a TS class
 @NgModule({
@@ -13,7 +14,8 @@ import { MessageListComponent }  from "./messages/message-list.component";
     declarations: [
         AppComponent,
         MessageComponent,
-        MessageListComponent
+        MessageListComponent,
+        MessageInputComponent
     ],
     imports: [BrowserModule, FormsModule],
     bootstrap: [AppComponent]
