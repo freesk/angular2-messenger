@@ -7,6 +7,11 @@ import { AppComponent } from "./app.component";
 import { MessageComponent }  from "./messages/message.component";
 import { MessageListComponent }  from "./messages/message-list.component";
 import { MessageInputComponent } from "./messages/message-input.component";
+import { MessagesComponent }  from "./messages/messages.component";
+import { AuthenticationComponent }  from "./auth/authentication.component";
+import { HeaderComponent } from "./header.component.ts";
+// An example of importing a variable
+import { routing } from "./app.routing" ;
 
 // Decorator attaches additional info to a TS class
 @NgModule({
@@ -15,9 +20,12 @@ import { MessageInputComponent } from "./messages/message-input.component";
         AppComponent,
         MessageComponent,
         MessageListComponent,
-        MessageInputComponent
+        MessageInputComponent,
+        MessagesComponent,
+        AuthenticationComponent,
+        HeaderComponent
     ],
-    imports: [BrowserModule, FormsModule],
+    imports: [BrowserModule, FormsModule, routing],
     bootstrap: [AppComponent]
 })
 // Class
