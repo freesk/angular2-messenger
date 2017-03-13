@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // To make [(ngModel)]="message.content" work
-import { FormsModule }  from "@angular/forms";
+import { FormsModule, ReactiveFormsModule }  from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { MessageComponent }  from "./messages/message.component";
@@ -12,6 +12,9 @@ import { AuthenticationComponent }  from "./auth/authentication.component";
 import { HeaderComponent } from "./header.component.ts";
 // An example of importing a variable
 import { routing } from "./app.routing" ;
+import { LogoutComponent } from "./auth/logout.component.ts";
+import { SignupComponent } from "./auth/signup.component.ts";
+import { SigninComponent } from "./auth/signin.component.ts";
 
 // Decorator attaches additional info to a TS class
 @NgModule({
@@ -23,9 +26,13 @@ import { routing } from "./app.routing" ;
         MessageInputComponent,
         MessagesComponent,
         AuthenticationComponent,
-        HeaderComponent
+        HeaderComponent,
+        LogoutComponent,
+        SignupComponent,
+        SigninComponent
     ],
-    imports: [BrowserModule, FormsModule, routing],
+    // "ReactiveFormsModule" for a form at the signup route
+    imports: [BrowserModule, FormsModule, routing, ReactiveFormsModule],
     bootstrap: [AppComponent]
 })
 // Class

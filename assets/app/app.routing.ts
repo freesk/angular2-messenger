@@ -2,6 +2,8 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { MessagesComponent } from "./messages/messages.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
+// Import routes for auth section
+import { authRoutes } from "./auth/auth.routes";
 
 const appRoutes: Routes = [
   {
@@ -15,7 +17,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthenticationComponent
+    component: AuthenticationComponent,
+    // Implementation of nested routes
+    children: authRoutes
   }
 ];
 
