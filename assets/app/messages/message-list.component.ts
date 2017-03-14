@@ -24,6 +24,13 @@ export class MessageListComponent implements OnInit {
   // OnInit @angular/core interface requires a method ngOnInit
   // This is for safe initialization
   ngOnInit() {
-    this.messages = this.messageService.getMessage();
+    this.messageService.getMessage()
+                       // Send a request
+                       .subscribe(
+                         (messages: Message[]) => {
+                           // Save into the component's object
+                           this.messages = messages;
+                         }
+                       );
   }
 }

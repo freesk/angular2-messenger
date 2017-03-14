@@ -13,6 +13,7 @@ var messageRoutes = require('./routes/message');
 var userRoutes = require('./routes/user');
 
 var app = express();
+// Set default promises
 mongoose.Promise = global.Promise;
 // Connect to DB
 mongoose.connect('localhost:27017/node-angualr');
