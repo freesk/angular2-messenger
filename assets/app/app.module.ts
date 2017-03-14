@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // To make [(ngModel)]="message.content" work
 import { FormsModule, ReactiveFormsModule }  from "@angular/forms";
+import { HttpModule } from "@angular/http";
 
 import { AppComponent } from "./app.component";
 import { MessageComponent }  from "./messages/message.component";
@@ -32,7 +33,14 @@ import { SigninComponent } from "./auth/signin.component.ts";
         SigninComponent
     ],
     // "ReactiveFormsModule" for a form at the signup route
-    imports: [BrowserModule, FormsModule, routing, ReactiveFormsModule],
+    // "HttpModule" for ajax calls
+    imports: [
+      BrowserModule,
+      FormsModule,
+      routing,
+      ReactiveFormsModule,
+      HttpModule
+    ],
     bootstrap: [AppComponent]
 })
 // Class

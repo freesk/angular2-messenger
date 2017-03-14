@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 // Get mongoose module
 var mongoose = require('mongoose');
 
+// Exporting routes modules
 var appRoutes = require('./routes/app');
+var messageRoutes = require('./routes/message');
+var userRoutes = require('./routes/user');
 
 var app = express();
+mongoose.Promise = global.Promise;
 // Connect to DB
 mongoose.connect('localhost:27017/node-angualr');
 
@@ -32,6 +36,8 @@ app.use(function (req, res, next) {
     next();
 });
 
+// The order is important
+app.use('/message', messageRoutes);
 app.use('/', appRoutes);
 
 // Catch 404 and forward to error handler
