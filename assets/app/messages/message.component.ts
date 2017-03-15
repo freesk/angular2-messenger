@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 import { Message }  from "./message.model";
 import { MessageService } from "./message.service";
@@ -27,18 +27,19 @@ export class MessageComponent {
   // Creating properties of the class
   // @Input is a class from angular/core that allows passing arguments into this component from a parent component
   @Input() message: Message;
-  // @Input is a class from angular/core that allows emitting events to a parent's component
-  // EventEmitter is a class from angular/core which makes us able to create custom events
-  @Output() edit = new EventEmitter<String>();
   // Make the message service accessable
   constructor(private messageService: MessageService) {}
-  // Emit a custom event
+  // Edit
   onEdit() {
-    this.edit.emit("New value");
+    // Call one of the service's methods
+    this.messageService.editMessage(this.message);
   }
   // Delete
   onDelete() {
     // Call one of the service's methods
-    this.messageService.deleteMessage(this.message);
+    this.messageService.deleteMessage(this.message)
+                       .subscribe(
+                         result => console.log(result)
+                       );
   }
 }

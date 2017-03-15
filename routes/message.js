@@ -34,8 +34,72 @@ router.post('/', function(req, res, next) {
     });
     // Status 201 - new resourse created
     res.status(201).json({
-      message: "Saved message",
+      message: "Message saved",
       obj: doc
+    });
+  });
+});
+
+router.patch('/:id', function(req, res, next) {
+  // Find by ID
+  Message.findById(req.params.id, function(err, doc) {
+    if(err) return res.status(500).json({
+      // Set a json object to send back
+      title: "An error occured",
+      err: err
+    });
+    if(!doc) return res.status(500).json({
+      // Set a json object to send back
+      title: "No messaage found",
+      err: new Error("No messaage found")
+    });
+    // Update the message's DB representation object
+    // Where does "content" come from?
+    doc.content = req.body.content;
+    // Save
+    doc.save(function(err, doc) {
+      // Status 500 - server error
+      if(err) return res.status(500).json({
+        // Set a json object to send back
+        title: "An error occured",
+        err: err
+      });
+      // Status 201 - new resourse created
+      res.status(200).json({
+        message: "Message updated",
+        obj: doc
+      });
+    });
+  });
+});
+
+
+router.delete('/:id', function(req, res, next) {
+  // Find by ID
+  Message.findById(req.params.id, function(err, doc) {
+    if(err) return res.status(500).json({
+      // Set a json object to send back
+      title: "An error occured",
+      err: err
+    });
+    if(!doc) return res.status(500).json({
+      // Set a json object to send back
+      title: "No messaage found",
+      err: new Error("No messaage found")
+    });
+    // Delete
+    doc.remove(function(err, doc) {
+      // Status 500 - server error
+      if(err) return res.status(500).json({
+        // Set a json object to send back
+        title: "An error occured",
+        err: err
+      });
+      // Status 201 - new resourse created
+      res.status(200).json({
+        message: "Message deleted",
+        obj: doc
+      });
     });
   });
 });

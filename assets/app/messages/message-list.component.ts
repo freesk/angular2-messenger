@@ -11,7 +11,7 @@ import { MessageService } from "./message.service";
       <!-- $event is a reference for incoming event data -->
       <!-- *ngFor is the iterator here. The star is for structural directives -->
       <!-- Passing an argument into a component in action  -->
-      <app-message [message]="message" (edit)="message.content = $event" *ngFor="let message of messages"></app-message>
+      <app-message [message]="message" *ngFor="let message of messages"></app-message>
     </div>
   `
 })
