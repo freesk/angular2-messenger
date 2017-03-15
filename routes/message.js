@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+// Import a DB model
 var Message = require('../models/message');
 
 router.get('/', function(req, res, next) {
@@ -34,7 +35,7 @@ router.post('/', function(req, res, next) {
     });
     // Status 201 - new resourse created
     res.status(201).json({
-      message: "Message saved",
+      message: "Message created",
       obj: doc
     });
   });

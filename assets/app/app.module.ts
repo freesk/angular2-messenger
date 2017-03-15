@@ -16,32 +16,38 @@ import { routing } from "./app.routing" ;
 import { LogoutComponent } from "./auth/logout.component.ts";
 import { SignupComponent } from "./auth/signup.component.ts";
 import { SigninComponent } from "./auth/signin.component.ts";
+import { AuthService } from "./auth/auth.service";
 
 // Decorator attaches additional info to a TS class
 @NgModule({
-    // Define all component in use
-    declarations: [
-        AppComponent,
-        MessageComponent,
-        MessageListComponent,
-        MessageInputComponent,
-        MessagesComponent,
-        AuthenticationComponent,
-        HeaderComponent,
-        LogoutComponent,
-        SignupComponent,
-        SigninComponent
-    ],
-    // "ReactiveFormsModule" for a form at the signup route
-    // "HttpModule" for ajax calls
-    imports: [
-      BrowserModule,
-      FormsModule,
-      routing,
-      ReactiveFormsModule,
-      HttpModule
-    ],
-    bootstrap: [AppComponent]
+  // Define all component in use
+  declarations: [
+    AppComponent,
+    MessageComponent,
+    MessageListComponent,
+    MessageInputComponent,
+    MessagesComponent,
+    AuthenticationComponent,
+    HeaderComponent,
+    LogoutComponent,
+    SignupComponent,
+    SigninComponent
+  ],
+  // "ReactiveFormsModule" for a form at the signup route
+  // "HttpModule" for ajax calls
+  imports: [
+    BrowserModule,
+    FormsModule,
+    routing,
+    ReactiveFormsModule,
+    HttpModule
+  ],
+  providers: [
+    AuthService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 // Class
 export class AppModule {

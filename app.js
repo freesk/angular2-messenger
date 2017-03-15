@@ -39,6 +39,7 @@ app.use(function (req, res, next) {
 
 // The order is important
 app.use('/message', messageRoutes);
+app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // Catch 404 and forward to error handler
