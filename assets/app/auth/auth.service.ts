@@ -23,4 +23,27 @@ export class AuthService {
                         return Observable.throw(error.json());
                       });
     }
+
+    signin(user: User) {
+      const body = JSON.stringify(user);
+      const headers = new Headers({
+        "Content-Type": "application/json"
+      });
+      return this.http.post("http://localhost:3000/user/signin", body, { headers: headers })
+                      .map((response: Response) => {
+                        return response.json();
+                      })
+                      .catch((error: Response) => {
+                        return Observable.throw(error.json());
+                      });
+    }
+
+    logout() {
+      // Just clear the local storage
+      localStorage.clear();
+    }
+
+    isLoggedIn() {
+      return localStorage.getItem('token') !== null;
+    }
 }

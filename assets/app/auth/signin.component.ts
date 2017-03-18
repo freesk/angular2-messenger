@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
+import { AuthService } from './auth.service';
+import { User } from "./user.model";
 
 @Component({
   selector: 'app-signin',
@@ -8,8 +12,26 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit() {
-    console.log(this.myForm);
+
+    console.log("Submit");
+
+    const user = new User(this.myForm.value.email, this.myForm.value.password);
+
+    this.authService.signin(user)
+        .subscribe(
+          data => {
+            // Accessing the local storage
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
+            // Go to the home page
+            this.router.navigateByUrl('/')
+          },
+          error => console.log(error)
+        );
+    this.myForm.reset();
   }
 
   // On init

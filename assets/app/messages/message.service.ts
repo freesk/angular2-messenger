@@ -25,18 +25,31 @@ export class MessageService {
     const headers = new Headers({
       "Content-Type": "application/json"
     });
+    // Create token parameter
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     // It doesn't send the requst, it's just setting up an observable object
-    return this.http.post('http://localhost:3000/message', body, { headers: headers })
+    return this.http.post('http://localhost:3000/message' + token, body, { headers: headers })
                     // Configure further response with map()
                     // json() turns returned piece of data into a js object
                     .map((response: Response) => {
+
+                        console.log(response);
+
                         const result = response.json();
-                        const message = new Message(result.obj.content, 'John', result.obj._id, null);
+                        const message = new Message(
+                          result.obj.content,
+                          result.obj.user.firstName,
+                          result.obj._id,
+                          result.obj.user._id
+                        );
                         this.messages.push(message);
                         return message;
                     })
                     // Observable.throw() required for matching map()'s returning object format
-                    .catch((error: Response) => Observable.throw(error.json()));
+                    .catch((error: Response) => {
+                      console.log(error);
+                      return Observable.throw(error.json());
+                    });
   }
 
   getMessage() {
@@ -48,7 +61,12 @@ export class MessageService {
                       let transformedMessages: Message[] = [];
                       // Fill the arr with new objects
                       for (let message of messages) {
-                        transformedMessages.push(new Message(message.content, 'John', message._id, null));
+                        transformedMessages.push(new Message(
+                          message.content,
+                          message.user.firstName,
+                          message._id,
+                          message.user._id
+                        ));
                       }
                       // Overwrite with the new one
                       this.messages = transformedMessages;
@@ -67,8 +85,10 @@ export class MessageService {
     const headers = new Headers({
       "Content-Type": "application/json"
     });
+    // Create token parameter
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     // It doesn't send the requst, it's just setting up an observable object
-    return this.http.patch('http://localhost:3000/message/' + message.messageId, body, { headers: headers })
+    return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, { headers: headers })
                     // Configure further response with map()
                     // json() turns returned piece of data into a js object
                     .map((response: Response) => response.json())
@@ -79,8 +99,10 @@ export class MessageService {
   deleteMessage(message: Message) {
     // Remove the given object from the array
     this.messages.splice(this.messages.indexOf(message), 1);
+    // Create token parameter
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     // It doesn't send the requst, it's just setting up an observable object
-    return this.http.delete('http://localhost:3000/message/' + message.messageId)
+    return this.http.delete('http://localhost:3000/message/' + message.messageId + token)
                     // Configure further response with map()
                     // json() turns returned piece of data into a js object
                     .map((response: Response) => response.json())

@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+
+var User = require('./user');
+
 // A blueprint object of the model
 var Schema = mongoose.Schema;
 // Initialize
@@ -16,5 +19,16 @@ var schema = new Schema({
       ref: 'User'
     }
 });
+
+// On delete event
+schema.post('remove', function(message) {
+    User.findById(message.user, function(err, user) {
+      // Remove from user's array
+      user.messages.pull(message);
+      // Save the updates
+      user.save();
+    });
+});
+
 // Export the model as "Message"
 module.exports = mongoose.model('Message', schema);
