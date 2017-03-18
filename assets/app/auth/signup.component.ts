@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   onSubmit() {
-    
+
     const user = new User(
       this.myForm.value.email,
       this.myForm.value.password,
