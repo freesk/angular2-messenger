@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs";
 
 import { Message }  from "./message.model";
+import { ErrorService } from "../error/error.service";
 
 // @Injectable a dummy decorator required for injecting services
 @Injectable()
@@ -15,7 +16,7 @@ export class MessageService {
   messageIsEdit = new EventEmitter<Message>();
 
   // Define ajax stuff
-  constructor(private http: Http) {}
+  constructor(private http: Http, private errorService: ErrorService) {}
 
   // Add a message into the array
   addMessage(message: Message) {
@@ -47,7 +48,7 @@ export class MessageService {
                     })
                     // Observable.throw() required for matching map()'s returning object format
                     .catch((error: Response) => {
-                      console.log(error);
+                      this.errorService.handleError(error.json());
                       return Observable.throw(error.json());
                     });
   }
@@ -72,7 +73,10 @@ export class MessageService {
                       this.messages = transformedMessages;
                       return transformedMessages;
                     })
-                    .catch((error: Response) => Observable.throw(error.json()));
+                    .catch((error: Response) => {
+                      this.errorService.handleError(error.json());
+                      return Observable.throw(error.json())
+                    });
   }
 
   editMessage(message: Message) {
@@ -93,7 +97,10 @@ export class MessageService {
                     // json() turns returned piece of data into a js object
                     .map((response: Response) => response.json())
                     // Observable.throw() required for matching map()'s returning object format
-                    .catch((error: Response) => Observable.throw(error.json()));
+                    .catch((error: Response) => {
+                      this.errorService.handleError(error.json());
+                      return Observable.throw(error.json())
+                    });
   }
 
   deleteMessage(message: Message) {
@@ -107,6 +114,9 @@ export class MessageService {
                     // json() turns returned piece of data into a js object
                     .map((response: Response) => response.json())
                     // Observable.throw() required for matching map()'s returning object format
-                    .catch((error: Response) => Observable.throw(error.json()));
+                    .catch((error: Response) => {
+                      this.errorService.handleError(error.json());
+                      return Observable.throw(error.json())
+                    });
   }
 }

@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
   } catch (err) {
     return res.status(500).json({
       title: "Missing register data",
-      err: err
+      err: { message: err.message }
     });
   }
 
@@ -55,12 +55,12 @@ router.post('/signin', function(req, res, next) {
     // Status 401 - not authorized
     if (!doc) return res.status(401).json({
       title: "Login failed",
-      err: new Error("User not found")
+      err: { message: "User not found" }
     });
     // Password
     if (!bcrypt.compareSync(req.body.password, doc.password)) return res.status(401).json({
       title: "Login failed",
-      err: new Error("Invalid password")
+      err: { message: "User not found" }
     });
     // Create a token
     var token = jwt.sign({ user: doc }, 'secret', { expiresIn: 7200 });

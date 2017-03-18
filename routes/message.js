@@ -31,7 +31,7 @@ router.use('/', function(req, res, next) {
   jwt.verify(req.query.token, 'secret', function(err, decoded) {
       if(err) return res.status(401).json({
         title: 'Not authorized',
-        error: err
+        err: err
       });
       // Move to the following routes
       next();
@@ -88,12 +88,12 @@ router.patch('/:id', function(req, res, next) {
     if (!doc) return res.status(500).json({
       // Set a json object to send back
       title: "No messaage found",
-      err: new Error("No messaage found")
+      err: { messaage: "No messaage found" }
     });
     // If it doesn't belong to the current user, throw an error
     if (doc.user != decoded.user._id) return res.status(401).json({
       title: 'Not authorized',
-      error: err
+      err: err
     });
     // Update the message's DB representation object
     // Where does "content" come from?
@@ -115,7 +115,6 @@ router.patch('/:id', function(req, res, next) {
   });
 });
 
-
 router.delete('/:id', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
   // Find by ID
@@ -128,7 +127,7 @@ router.delete('/:id', function(req, res, next) {
     if (!doc) return res.status(500).json({
       // Set a json object to send back
       title: "No messaage found",
-      err: new Error("No messaage found")
+      err: { messaage: "No messaage found" }
     });
     // If it doesn't belong to the current user, throw an error
     if (doc.user != decoded.user._id) return res.status(401).json({

@@ -4,11 +4,12 @@ import "rxjs/Rx";
 import { Observable } from "rxjs";
 
 import { User } from "./user.model";
+import { ErrorService } from "../error/error.service";
 
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private errorService: ErrorService) {}
 
     signup(user: User) {
       const body = JSON.stringify(user);
@@ -20,7 +21,8 @@ export class AuthService {
                         return response.json();
                       })
                       .catch((error: Response) => {
-                        return Observable.throw(error.json());
+                        this.errorService.handleError(error.json());
+                        return Observable.throw(error.json())
                       });
     }
 
@@ -34,7 +36,8 @@ export class AuthService {
                         return response.json();
                       })
                       .catch((error: Response) => {
-                        return Observable.throw(error.json());
+                        this.errorService.handleError(error.json());
+                        return Observable.throw(error.json())
                       });
     }
 
