@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs";
 
 import { Message }  from "./message.model";
-import { ErrorService } from "../error/error.service";
+import { ErrorService } from "../errors/error.service";
 
 // @Injectable a dummy decorator required for injecting services
 @Injectable()

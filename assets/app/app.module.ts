@@ -17,8 +17,8 @@ import { LogoutComponent } from "./auth/logout.component.ts";
 import { SignupComponent } from "./auth/signup.component.ts";
 import { SigninComponent } from "./auth/signin.component.ts";
 import { AuthService } from "./auth/auth.service";
-import { ErrorComponent } from "./error/error.component";
-import { ErrorService } from "./error/error.service";
+import { ErrorComponent } from "./errors/error.component";
+import { ErrorService } from "./errors/error.service";
 
 // Decorator attaches additional info to a TS class
 @NgModule({
@@ -54,6 +54,4 @@ import { ErrorService } from "./error/error.service";
   ]
 })
 // Class
-export class AppModule {
-
-}
+export class AppModule {}
