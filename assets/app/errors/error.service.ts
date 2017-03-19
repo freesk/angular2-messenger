@@ -7,7 +7,9 @@ export class ErrorService {
 
   handleError(error: any) {
 
-    console.log(error)
+    // let error = error;
+    //
+    // error.title = error.title || "No title";
 
     const errorData = new Error(error.title, error.err.message);
     this.errorOccured.emit(errorData);

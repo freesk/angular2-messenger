@@ -3,3 +3,4 @@ node_modules
 npm-debug.log
 public/js/app/**/*.*
 !public/js/app/.gitkeep
+assets/app/**/*.ngfactory.*
