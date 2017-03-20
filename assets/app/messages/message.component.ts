@@ -38,6 +38,7 @@ export class MessageComponent {
   onDelete() {
     // Call one of the service's methods
     this.messageService.deleteMessage(this.message)
+                       // Subscribe for a returned promise
                        .subscribe(
                          result => console.log(result)
                        );

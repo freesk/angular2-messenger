@@ -5,6 +5,7 @@ import { AuthenticationComponent } from "./auth/authentication.component";
 
 const appRoutes: Routes = [
   {
+    // Root path setup
     path: '',
     redirectTo: '/messages',
     pathMatch: 'full'

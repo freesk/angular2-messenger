@@ -22,8 +22,9 @@ import { MessageModule } from "./messages/message.module";
     HeaderComponent,
     ErrorComponent
   ],
-  // "ReactiveFormsModule" for a form at the signup route
+  // "ReactiveFormsModule" for a form at the auth route
   // "HttpModule" for ajax calls
+  // "MessageModule" is an example of a non root moduel
   imports: [
     BrowserModule,
     routing,
