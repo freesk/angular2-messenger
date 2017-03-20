@@ -27,7 +27,6 @@ import { MessageModule } from "./messages/message.module";
   imports: [
     BrowserModule,
     routing,
-
     HttpModule,
     MessageModule
   ],
